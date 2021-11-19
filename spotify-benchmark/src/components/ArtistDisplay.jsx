@@ -5,6 +5,7 @@ import { useParams, Link } from 'react-router-dom'
 
 const ArtistDisplay = () => {
     const [artistToDisplay, setArtistToDisplay] = useState({})
+    const [topThreeSongs, setTopThreeSongs] = useState([])
 
     const params = useParams()
     console.log(params)
@@ -33,8 +34,29 @@ const ArtistDisplay = () => {
 
     }
 
+    const getTopThree = async (artistId) => {
+        try {
+            const response = await fetch('https://striveschool-api.herokuapp.com/api/deezer/artist/' + artistId + '/top?limit=3', {
+                headers: {
+                    "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGY4NmFhY2FhMjAwMTU1MmExODAiLCJpYXQiOjE2MzY2MzY5MzcsImV4cCI6MTYzNzg0NjUzN30.uqOJ27uEjuSzPvSujE9DuNRI0lJELmoanrTPYDsO6qU"
+                }
+            })
+            if (response.ok) {
+                const topThreeData = await response.json()
+                setTopThreeSongs(topThreeData.data)
+            } else {
+                console.log('response error!')
+                setIsError(true)
+            }
+        } catch (error) {
+            console.log('fetch error!')
+            setIsError(true)
+        }
+    }
+
     useEffect(() => {
         getArtist(params.artistId)
+        getTopThree(params.artistId)
     })
 
     return (
@@ -61,48 +83,24 @@ const ArtistDisplay = () => {
                     </div>
                     <div class="pt-5 mb-5">
                         <div class="row" id="apiLoaded">
-                            <div class="col-sm-auto col-md-auto text-center mb-5">
-                                <Link to="/">
-                                    <img
-                                        class="img-fluid"
-                                        src="https://cdns-images.dzcdn.net/images/cover/e2491c22fb19c154e46b449ff7aa7a62/250x250-000000-80-0-0.jpg"
-                                        alt="1"
-                                    />
-                                </Link>
-                                <p>
-                                    <Link to='/'><div> Track: "Shape Of My Hear..." </div></Link>
-                                    <br />
-                                    <Link to="/"><div> Album: "Ten Summoner's T..." </div></Link>
-                                </p>
-                            </div>
-                            <div class="col-sm-auto col-md-auto text-center mb-5">
-                                <Link to="/">
-                                    <img
-                                        class="img-fluid"
-                                        src="https://cdns-images.dzcdn.net/images/cover/e2491c22fb19c154e46b449ff7aa7a62/250x250-000000-80-0-0.jpg"
-                                        alt="1"
-                                    />
-                                </Link>
-                                <p>
-                                    <Link to='/'><div> Track: "Russians"  </div></Link>
-                                    <br />
-                                    <Link to="/"><div> Album: "Fields Of Gold -..." </div></Link>
-                                </p>
-                            </div>
-                            <div class="col-sm-auto col-md-auto text-center mb-5">
-                                <Link to="/">
-                                    <img
-                                        class="img-fluid"
-                                        src="https://cdns-images.dzcdn.net/images/cover/e2491c22fb19c154e46b449ff7aa7a62/250x250-000000-80-0-0.jpg"
-                                        alt="1"
-                                    />
-                                </Link>
-                                <p>
-                                    <Link to='/'><div> Track: "Every Breath You..." </div></Link>
-                                    <br />
-                                    <Link to="/"><div> Album: "My Songs (Deluxe..." </div></Link>
-                                </p>
-                            </div>
+                            {
+                                topThreeSongs?.slice(0, 3).map((song) => (
+                                    <div class="col-sm-auto col-md-auto text-center mb-5">
+                                        <Link to="/">
+                                            <img
+                                                class="img-fluid"
+                                                src={song?.album?.cover_xl}
+                                                alt="1"
+                                            />
+                                        </Link>
+                                        <p>
+                                            <Link to='/'><div> Song:  {song.title_short} </div></Link>
+                                            <br />
+                                            <Link to="/"><div> Album: {song?.album?.title} </div></Link>
+                                        </p>
+                                    </div>
+                                ))
+                            }
                         </div>
                     </div>
                 </div>
