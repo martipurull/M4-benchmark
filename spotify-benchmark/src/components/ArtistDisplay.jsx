@@ -13,7 +13,7 @@ const ArtistDisplay = () => {
 
     const getArtist = async (artistId) => {
         try {
-            const response = await fetch('https://striveschool-api.herokuapp.com/api/deezer/album/' + artistId, {
+            const response = await fetch('https://striveschool-api.herokuapp.com/api/deezer/artist/' + artistId, {
                 headers: {
                     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MTgyOGY4NmFhY2FhMjAwMTU1MmExODAiLCJpYXQiOjE2MzY2MzY5MzcsImV4cCI6MTYzNzg0NjUzN30.uqOJ27uEjuSzPvSujE9DuNRI0lJELmoanrTPYDsO6qU"
                 }
