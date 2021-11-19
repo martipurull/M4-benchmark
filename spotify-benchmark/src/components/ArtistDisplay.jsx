@@ -96,7 +96,7 @@ const ArtistDisplay = () => {
                                         <p>
                                             <Link to='/'><div> Song:  {song.title_short} </div></Link>
                                             <br />
-                                            <Link to="/"><div> Album: {song?.album?.title} </div></Link>
+                                            <Link to={"/album-page/" + song?.album?.id}><div> Album: {song?.album?.title} </div></Link>
                                         </p>
                                     </div>
                                 ))
