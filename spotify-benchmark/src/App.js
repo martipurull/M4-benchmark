@@ -18,9 +18,9 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
+        <SideBar />
         <Container fluid>
           <Row>
-            <SideBar />
             <Routes>
               <Route path="/" element={<HomePage setAlbumId={setAlbumId} setArtistId={setArtistId} />} />
               <Route path="/album-page/:albumId" element={<AlbumPage albumId={albumId} />} />
@@ -28,8 +28,8 @@ function App() {
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Row>
+          <BottomBar />
         </Container>
-        <BottomBar />
       </BrowserRouter>
     </div>
   );

@@ -114,14 +114,14 @@ ul {
   margin: 0 auto;
 }
 
-.playerControls a img {
+.playerControls div img {
   width: 14px;
   max-height: 16px;
   margin-right: 0.5rem;
   filter: brightness(60%);
 }
 
-.playerControls a:hover {
+.playerControls div:hover {
   filter: brightness(80%);
   color: #282828 !important;
 }

@@ -40,7 +40,7 @@ const AlbumDisplay = () => {
 
     useEffect(() => {
         console.log(params)
-        getAlbum(params)
+        getAlbum(params.albumId)
         // eslint-disable-next-line
     }, [])
 
@@ -56,17 +56,17 @@ const AlbumDisplay = () => {
                     <p class="album-title">{albumToDisplay.title}</p>
                 </div>
                 <div class="text-center">
-                    <p class="artist-name">{albumToDisplay.artist.name}</p>
+                    <p class="artist-name">{albumToDisplay?.artist?.name}</p>
                 </div>
                 <div class="mt-4 text-center">
                     <button id="btnPlay" class="btn btn-success" type="button">
                         Play
-                </button>
+                    </button>
                 </div>
             </div>
             <div class="col-md-8 p-5">
                 {
-                    albumToDisplay.tracks.data.map(track => (
+                    albumToDisplay?.tracks?.data.map(track => (
                         <div key={track.id} class="row">
                             <div id="trackList" class="col-md-10 mb-5">
                                 <div id="err"></div>

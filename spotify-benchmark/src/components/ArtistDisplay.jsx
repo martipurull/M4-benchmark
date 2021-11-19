@@ -34,7 +34,7 @@ const ArtistDisplay = () => {
     }
 
     useEffect(() => {
-        getArtist(params)
+        getArtist(params.artistId)
     })
 
     return (
