@@ -1,10 +1,14 @@
-
+import TopBar from './TopBar'
+import ArtistDisplay from './ArtistDisplay'
 
 
 const ArtistPage = () => {
 
     return (
-        <h2>HERE BE ARTIST PAGE</h2>
+        <div className="col-12 col-md-9 offset-md-3 mainPage">
+            <TopBar />
+            <ArtistDisplay />
+        </div>
     )
 }
 
