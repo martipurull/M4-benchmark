@@ -9,18 +9,22 @@ import NotFound from './components/NotFound'
 import BottomBar from './components/BottomBar'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
+import { useState } from 'react';
 
 function App() {
+  const [albumId, setAlbumId] = useState(null)
+  const [artistId, setArtistId] = useState(null)
+
   return (
     <div className="App">
       <BrowserRouter>
-        <SideBar />
         <Container fluid>
           <Row>
+            <SideBar />
             <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/album-page" element={<AlbumPage />} />
-              <Route path="/artist-page" element={<ArtistPage />} />
+              <Route path="/" element={<HomePage setAlbumId={setAlbumId} setArtistId={setArtistId} />} />
+              <Route path="/album-page/:albumId" element={<AlbumPage albumId={albumId} />} />
+              <Route path="/artist-page/:artistId" element={<ArtistPage artistId={artistId} />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </Row>
